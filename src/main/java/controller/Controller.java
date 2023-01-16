@@ -1,5 +1,6 @@
 package controller;
 
+import view.CommandLineView;
 import view.View;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ public class Controller {
         menuItems.put(2, "List");
         menuItems.put(3, "Modify");
         menuItems.put(4, "Delete");
-        return view.ListAndChoice(menuItems);
+        return view.showAndChoice(menuItems);
     }
 
     public void run() {
@@ -27,19 +28,19 @@ public class Controller {
         while (choice != 0){
             switch (choice){
                 case 1:
-                    System.out.println("Add");
+                    System.err.println("Add");
                     break;
                 case 2:
-                    System.out.println("List");
+                    System.err.println("List");
                     break;
                 case 3:
-                    System.out.println("Modify");
+                    System.err.println("Modify");
                     break;
                 case 4:
-                    System.out.println("Delete");
+                    System.err.println("Delete");
                     break;
                 default:
-                    System.out.println("Invalid choice");
+                    System.err.println("Invalid choice");
             }
             choice = showAndChoiceMenu();
         }
