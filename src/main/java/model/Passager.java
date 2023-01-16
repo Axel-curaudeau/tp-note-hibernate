@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 public class Passager {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int IDPassager;
 
     private String nom;

@@ -1,14 +1,13 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 public class Personnel {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int IDPersonnel;
 
     private String nom;

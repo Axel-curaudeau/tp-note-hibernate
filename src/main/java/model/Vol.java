@@ -1,14 +1,13 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 public class Vol {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int IDVol;
 
     private String villeDepart;
