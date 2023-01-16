@@ -1,4 +1,5 @@
 package model;
 
-public class Volant {
+public class Volant extends Personnel {
+
 }
