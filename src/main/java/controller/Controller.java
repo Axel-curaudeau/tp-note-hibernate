@@ -2,7 +2,6 @@ package controller;
 
 import view.View;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Controller {
@@ -26,7 +25,7 @@ public class Controller {
         while (choice != 0){
             switch (choice){
                 case 1:
-                    LocalDate date = View.AfficherVolsSurUneJournee();
+                    LocalDate date = View.afficherVolsSurUneJournee();
                     break;
                 case 2:
                     System.err.println("List");
