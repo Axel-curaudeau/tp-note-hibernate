@@ -20,12 +20,19 @@ public class Controller {
         return view.affichageEtChoixMenu(menuItems);
     }
 
+    public void afficherVolsSurUneJounee() {
+        LocalDate date = view.getDate();
+
+        // TODO Récupérer les vols de cette date
+        // TODO Afficher les vols à la vue
+    }
+
     public void run() {
         Integer choice = affichageEtChoixMenu();
         while (choice != 0){
             switch (choice){
                 case 1:
-                    LocalDate date = View.afficherVolsSurUneJournee();
+                    afficherVolsSurUneJournee();
                     break;
                 case 2:
                     System.err.println("List");
