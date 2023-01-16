@@ -16,10 +16,17 @@ public class Depart {
     @ManyToOne(cascade = CascadeType.ALL)
     private Vol vol;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "depart")
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Personnel> listePersonnel;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "ListeDepart")
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Passager> listePassager;
 
+    public Integer getIDDepart() {
+        return IDDepart;
+    }
+
+    public void addPersonnel(Personnel personnel) {
+        listePersonnel.add(personnel);
+    }
 }

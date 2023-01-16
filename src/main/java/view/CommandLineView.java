@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class CommandLineView implements View {
 
-    public Integer affichageEtChoixMenu(HashMap<Integer, String> menuItems) {
+    public Integer affichageEtChoixMenu(HashMap<Integer, Object> menuItems) {
         System.out.println("*--------------- MENU ---------------*");
         for (Integer key : menuItems.keySet()) {
             System.out.println(key + " - " + menuItems.get(key));

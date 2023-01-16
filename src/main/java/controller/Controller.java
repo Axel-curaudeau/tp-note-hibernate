@@ -1,9 +1,13 @@
 package controller;
 
 import jakarta.persistence.*;
+import model.Depart;
+import model.Personnel;
+import model.Vol;
 import view.View;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 
 public class Controller {
     private View view;
@@ -30,8 +34,8 @@ public class Controller {
     }
 
     public Integer affichageEtChoixMenu() {
-        HashMap<Integer, String> menuItems = new HashMap<>();
-        menuItems.put(0, "Exit");
+        HashMap<Integer, Object> menuItems = new HashMap<>();
+        menuItems.put(0, "Quitter");
         menuItems.put(1, "Afficher les détails d'un vol");
         menuItems.put(2, "List");
         menuItems.put(3, "Modify");
@@ -39,7 +43,7 @@ public class Controller {
         return view.affichageEtChoixMenu(menuItems);
     }
 
-    public void afficherVolsSurUneJounee() {
+    public void afficherVolsSurUneJournee() {
         LocalDate date = view.getDate();
 
         // TODO Récupérer les vols de cette date
@@ -69,7 +73,36 @@ public class Controller {
         }
     }
 
+    private List<Personnel> recupererToutPersonnel() {
+        Query query = em.createQuery("from Personnel");
+        return (List<Personnel>) query.getResultList();
+    }
+
+    private List<Depart> recupererToutDepart() {
+        Query query = em.createQuery("from Depart");
+        return (List<Depart>) query.getResultList();
+    }
+
     private void associerPersonnelVol() {
-        View.afficherPersonnel();
+        HashMap<Integer, Object> menuItems = new HashMap<>();
+
+        List<Personnel> personnels = recupererToutPersonnel();
+        for (Personnel personnel : personnels) {
+            menuItems.put(personnel.getIDPersonnel(), personnel);
+        }
+
+        Integer choice = view.affichageEtChoixMenu(menuItems);
+        Personnel personnel = (Personnel) menuItems.get(choice);
+
+        menuItems = new HashMap<>();
+        List<Depart> departs = recupererToutDepart();
+        for (Depart depart : departs) {
+            menuItems.put(depart.getIDDepart(), depart);
+        }
+        Integer choice2 = view.affichageEtChoixMenu(menuItems);
+        Depart depart = (Depart) menuItems.get(choice2);
+
+        personnel.addDepart(depart);
+        depart.addPersonnel(personnel);
     }
 }

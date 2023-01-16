@@ -16,4 +16,12 @@ public class Personnel {
 
     @ManyToMany(mappedBy = "listePersonnel")
     private List<Depart> listeDepart;
+
+    public Integer getIDPersonnel() {
+        return IDPersonnel;
+    }
+
+    public void addDepart(Depart depart) {
+        listeDepart.add(depart);
+    }
 }

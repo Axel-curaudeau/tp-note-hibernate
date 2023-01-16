@@ -17,4 +17,7 @@ public class Vol {
     @OneToMany(mappedBy = "vol")
     private List<Depart> depart;
 
+    public Integer getIDVol() {
+        return IDVol;
+    }
 }
