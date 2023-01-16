@@ -3,6 +3,7 @@ package controller;
 import view.CommandLineView;
 import view.View;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Controller {
     public Integer showAndChoiceMenu() {
         HashMap<Integer, String> menuItems = new HashMap<>();
         menuItems.put(0, "Exit");
-        menuItems.put(1, "Add");
+        menuItems.put(1, "Afficher les détails d'un vol");
         menuItems.put(2, "List");
         menuItems.put(3, "Modify");
         menuItems.put(4, "Delete");
@@ -28,7 +29,7 @@ public class Controller {
         while (choice != 0){
             switch (choice){
                 case 1:
-                    System.err.println("Add");
+                    LocalDate date = View.AfficherVolsSurUneJournee();
                     break;
                 case 2:
                     System.err.println("List");
