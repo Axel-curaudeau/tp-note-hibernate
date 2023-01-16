@@ -1,13 +1,32 @@
 package controller;
 
+import jakarta.persistence.*;
 import view.View;
 import java.time.LocalDate;
 import java.util.HashMap;
 
 public class Controller {
     private View view;
+
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager em;
+    private EntityTransaction tx;
     public Controller(View view) {
         this.view = view;
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("TP9");
+        this.em = entityManagerFactory.createEntityManager();
+        this.tx = em.getTransaction();
+    }
+
+    public void disconnect() {
+        em.close();
+        entityManagerFactory.close();
+    }
+
+    public void commit(Object object) {
+        tx.begin();
+        em.persist(object);
+        tx.commit();
     }
 
     public Integer affichageEtChoixMenu() {
@@ -28,7 +47,7 @@ public class Controller {
                     LocalDate date = View.afficherVolsSurUneJournee();
                     break;
                 case 2:
-                    System.err.println("List");
+                    associerPersonnelVol();
                     break;
                 case 3:
                     System.err.println("Modify");
@@ -41,5 +60,9 @@ public class Controller {
             }
             choice = affichageEtChoixMenu();
         }
+    }
+
+    private void associerPersonnelVol() {
+        View.afficherPersonnel();
     }
 }
