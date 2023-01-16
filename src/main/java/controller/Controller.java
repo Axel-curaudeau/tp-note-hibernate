@@ -1,11 +1,8 @@
 package controller;
 
-import view.CommandLineView;
 import view.View;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class Controller {
     private View view;
@@ -13,18 +10,18 @@ public class Controller {
         this.view = view;
     }
 
-    public Integer showAndChoiceMenu() {
+    public Integer affichageEtChoixMenu() {
         HashMap<Integer, String> menuItems = new HashMap<>();
         menuItems.put(0, "Exit");
         menuItems.put(1, "Add");
         menuItems.put(2, "List");
         menuItems.put(3, "Modify");
         menuItems.put(4, "Delete");
-        return view.showAndChoice(menuItems);
+        return view.affichageEtChoixMenu(menuItems);
     }
 
     public void run() {
-        Integer choice = showAndChoiceMenu();
+        Integer choice = affichageEtChoixMenu();
         while (choice != 0){
             switch (choice){
                 case 1:
@@ -42,7 +39,7 @@ public class Controller {
                 default:
                     System.err.println("Invalid choice");
             }
-            choice = showAndChoiceMenu();
+            choice = affichageEtChoixMenu();
         }
     }
 }
