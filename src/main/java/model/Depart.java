@@ -29,4 +29,8 @@ public class Depart {
     public void addPersonnel(Personnel personnel) {
         listePersonnel.add(personnel);
     }
+
+    public String getDateDepart() {
+        return dateDepart;
+    }
 }

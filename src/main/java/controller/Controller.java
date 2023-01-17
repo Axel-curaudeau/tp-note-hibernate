@@ -37,7 +37,7 @@ public class Controller {
         HashMap<Integer, Object> menuItems = new HashMap<>();
         menuItems.put(0, "Quitter");
         menuItems.put(1, "Afficher les détails d'un vol");
-        menuItems.put(2, "List");
+        menuItems.put(2, "Associer du personnel à un départ de vol");
         menuItems.put(3, "Modify");
         menuItems.put(4, "Delete");
         return view.affichageEtChoixMenu(menuItems);
@@ -45,29 +45,20 @@ public class Controller {
 
     public void afficherVolsSurUneJournee() {
         LocalDate date = view.getDate();
-
-        // TODO Récupérer les vols de cette date
-        // TODO Afficher les vols à la vue
+        List<Object> departs = em.createQuery("from Depart").getResultList();
+        departs.removeIf(depart -> LocalDate.parse( != date);
+        view.afficherListe(departs);
     }
 
     public void run() {
         Integer choice = affichageEtChoixMenu();
         while (choice != 0){
-            switch (choice){
-                case 1:
-                    afficherVolsSurUneJournee();
-                    break;
-                case 2:
-                    associerPersonnelVol();
-                    break;
-                case 3:
-                    System.err.println("Modify");
-                    break;
-                case 4:
-                    System.err.println("Delete");
-                    break;
-                default:
-                    System.err.println("Invalid choice");
+            switch (choice) {
+                case 1 -> afficherVolsSurUneJournee();
+                case 2 -> associerPersonnelVol();
+                case 3 -> System.err.println("Modify");
+                case 4 -> System.err.println("Delete");
+                default -> System.err.println("Invalid choice");
             }
             choice = affichageEtChoixMenu();
         }
@@ -84,6 +75,7 @@ public class Controller {
     }
 
     private void associerPersonnelVol() {
+
         HashMap<Integer, Object> menuItems = new HashMap<>();
 
         List<Personnel> personnels = recupererToutPersonnel();
@@ -104,5 +96,8 @@ public class Controller {
 
         personnel.addDepart(depart);
         depart.addPersonnel(personnel);
+
+        commit(personnel);
+        commit(depart);
     }
 }

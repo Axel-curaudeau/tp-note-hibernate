@@ -8,9 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/model/Depart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Depart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Personnel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Personnel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Vol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Vol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/view/CommandLineView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CommandLineView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +81,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9ddb5acb-9f9f-4cbf-b680-9a25ef502e7b" name="Changes" comment="" />
+      <changelist id="f2eecf6a-39c4-4ea0-b782-0979fcf3f9ed" name="Changes" comment="" />
       <created>1673866409239</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
