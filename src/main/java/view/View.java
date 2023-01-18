@@ -23,4 +23,5 @@ public interface View {
 
     Integer affichageEtChoixPersonnel(HashMap<Integer, Personnel> personnelItem);
 
+    void afficherListePersonnel(List<Personnel> personnels);
 }

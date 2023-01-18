@@ -7,6 +7,10 @@
     <list default="true" id="f2eecf6a-39c4-4ea0-b782-0979fcf3f9ed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Controller.java" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/main/java/model/Personnel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Personnel.java" afterDir="false" />
+=======
+>>>>>>> 815f9c4f4cef826bdc27596726cbe5617b6bb542
       <change beforePath="$PROJECT_DIR$/src/main/java/view/CommandLineView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/CommandLineView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/View.java" afterDir="false" />
     </list>

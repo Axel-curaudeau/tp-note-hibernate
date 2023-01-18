@@ -24,6 +24,10 @@ public class Personnel {
         listeDepart = new ArrayList<Depart>();
     }
 
+    public Personnel() {
+        listeDepart = new ArrayList<Depart>();
+    }
+
     public Integer getIDPersonnel() {
         return IDPersonnel;
     }
@@ -38,5 +42,9 @@ public class Personnel {
 
     public String getPrenom() {
         return prenom;
+    }
+
+    public List<Depart> getListeDepart() {
+        return listeDepart;
     }
 }

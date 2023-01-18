@@ -74,6 +74,12 @@ public class CommandLineView implements View {
         return scanner.nextInt();
     }
 
+    public void afficherListePersonnel(List<Personnel> personnels) {
+        for (Personnel personnel : personnels) {
+            System.out.println(personnel.getIDPersonnel() + " - " + personnel.getNom() + " - " + personnel.getPrenom());
+        }
+    }
+
     @Override
     public void afficherMessageErreur(String s) {
         System.err.println(s);
