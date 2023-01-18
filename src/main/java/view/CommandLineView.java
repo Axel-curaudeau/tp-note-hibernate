@@ -1,5 +1,7 @@
 package view;
 
+import model.Depart;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
@@ -33,9 +35,9 @@ public class CommandLineView implements View {
     }
 
     @Override
-    public void afficherListe(List<Object> list) {
-        for (Object object : list) {
-            System.out.println(list);
+    public void afficherListeDepart(List<Depart> listeDepart) {
+        for (Depart depart : listeDepart) {
+            System.out.println(depart.getIDDepart() + " - " + depart.getDateDepart() + " - " + depart.getVol().getVilleDepart() + " - " + depart.getVol().getVilleArrivee());
         }
     }
 

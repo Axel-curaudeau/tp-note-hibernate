@@ -1,11 +1,10 @@
 package controller;
 
 import jakarta.persistence.*;
-import model.Depart;
-import model.Personnel;
-import model.Vol;
+import model.*;
 import view.View;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +19,8 @@ public class Controller {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("TP9");
         this.em = entityManagerFactory.createEntityManager();
         this.tx = em.getTransaction();
+
+        insertDummyData();
     }
 
     public void disconnect() {
@@ -49,19 +50,23 @@ public class Controller {
             view.afficherMessageErreur("Date saisie invalide !");
             return;
         }
-        List<Object> departs = em.createQuery("from Depart").getResultList();
+        List<Depart> departs = em.createQuery("from Depart").getResultList();
+        view.afficherListeDepart(departs);
         if (departs.isEmpty()) {
             view.afficherMessage("Aucun vol n'est enregistré dans la base de données.");
             return;
         }
-        for (Object depart : departs) {
+
+        List<Depart> departsSurDate = new ArrayList<Depart>();
+
+        for (Depart depart : departs) {
             Depart departTemporaire = (Depart) depart;
-            if (LocalDate.parse(departTemporaire.getDateDepart()) != date) {
-                departs.remove(departTemporaire);
+            if (LocalDate.parse(departTemporaire.getDateDepart()) == date) {
+                departsSurDate.add(depart);
             }
         }
         //TODO: Vérifier si l'affichage est correcte
-        view.afficherListe(departs);
+        view.afficherListeDepart(departsSurDate);
     }
 
     public void run() {
@@ -113,5 +118,23 @@ public class Controller {
 
         commit(personnel);
         commit(depart);
+    }
+
+
+    public void insertDummyData() {
+        Volant pilote = new Volant("jean", "Dupont");
+        NonVolant Valiseur = new NonVolant("Charles", "Valise");
+        Depart depart = new Depart("2021-05-01");
+        Vol vol = new Vol("Paris", "Londres");
+        vol.addDepart(depart);
+        depart.addVol(vol);
+        pilote.addDepart(depart);
+        Valiseur.addDepart(depart);
+        depart.addPersonnel(pilote);
+        depart.addPersonnel(Valiseur);
+        commit(pilote);
+        commit(Valiseur);
+        commit(depart);
+        commit(vol);
     }
 }

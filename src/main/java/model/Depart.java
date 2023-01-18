@@ -2,6 +2,7 @@ package model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,6 +23,12 @@ public class Depart {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Passager> listePassager;
 
+    public Depart(String dateDepart) {
+        this.dateDepart = dateDepart;
+        listePersonnel = new ArrayList<Personnel>();
+        listePassager = new ArrayList<Passager>();
+    }
+
     public Integer getIDDepart() {
         return IDDepart;
     }
@@ -32,5 +39,13 @@ public class Depart {
 
     public String getDateDepart() {
         return dateDepart;
+    }
+
+    public void addVol(Vol vol) {
+        this.vol = vol;
+    }
+
+    public Vol getVol() {
+        return vol;
     }
 }

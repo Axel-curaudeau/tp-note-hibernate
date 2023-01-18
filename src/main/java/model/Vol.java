@@ -2,6 +2,7 @@ package model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,9 +16,27 @@ public class Vol {
     private String villeArrivee;
 
     @OneToMany(mappedBy = "vol")
-    private List<Depart> depart;
+    private List<Depart> listeDepart;
+
+    public Vol(String villeDepart, String villeArrivee) {
+        this.villeDepart = villeDepart;
+        this.villeArrivee = villeArrivee;
+        listeDepart = new ArrayList<Depart>();
+    }
 
     public Integer getIDVol() {
         return IDVol;
+    }
+
+    public void addDepart(Depart depart) {
+        this.listeDepart.add(depart);
+    }
+
+    public String getVilleDepart() {
+        return villeDepart;
+    }
+
+    public String getVilleArrivee() {
+        return villeArrivee;
     }
 }

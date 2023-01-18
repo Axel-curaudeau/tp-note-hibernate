@@ -11,9 +11,10 @@ public interface View {
 
     LocalDate getDate();
 
-    void afficherListe(List<Object> list);
 
     void afficherMessageErreur(String s);
 
     void afficherMessage(String s);
+
+    void afficherListeDepart(List<Depart> departs);
 }
