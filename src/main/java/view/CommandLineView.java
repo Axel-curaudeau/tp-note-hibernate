@@ -37,8 +37,16 @@ public class CommandLineView implements View {
 
     @Override
     public void afficherListeDepart(List<Depart> listeDepart) {
+        if (listeDepart.isEmpty()) {
+            System.out.println("Aucun Depart correspondant.");
+        }
         for (Depart depart : listeDepart) {
-            System.out.println(depart.getIDDepart() + " - " + depart.getDateDepart() + " - " + depart.getVol().getVilleDepart() + " - " + depart.getVol().getVilleArrivee());
+            System.out.println(
+                    "Départ numéro " +
+                    depart.getIDDepart() +
+                    " du " + depart.getDateDepart() +
+                    " partant de " + depart.getVol().getVilleDepart() +
+                    " et allant à " + depart.getVol().getVilleArrivee());
         }
     }
 

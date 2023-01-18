@@ -50,18 +50,13 @@ public class Controller {
             view.afficherMessageErreur("Date saisie invalide !");
             return;
         }
-        List<Depart> departs = em.createQuery("from Depart").getResultList();
-        view.afficherListeDepart(departs);
-        if (departs.isEmpty()) {
-            view.afficherMessage("Aucun vol n'est enregistré dans la base de données.");
-            return;
-        }
 
+        List<Depart> departs = em.createQuery("from Depart").getResultList();
         List<Depart> departsSurDate = new ArrayList<Depart>();
 
         for (Depart depart : departs) {
-            Depart departTemporaire = (Depart) depart;
-            if (LocalDate.parse(departTemporaire.getDateDepart()) == date) {
+            Depart departTemporaire = depart;
+            if (LocalDate.parse(departTemporaire.getDateDepart()).equals(date)) {
                 departsSurDate.add(depart);
             }
         }
