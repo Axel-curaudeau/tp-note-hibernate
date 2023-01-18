@@ -1,6 +1,7 @@
 package view;
 
 import model.Depart;
+import model.Personnel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -10,10 +11,10 @@ import java.util.Scanner;
 
 public class CommandLineView implements View {
 
-    public Integer affichageEtChoixMenu(HashMap<Integer, Object> menuItems) {
+    public Integer affichageEtChoixDepart(HashMap<Integer, Depart> menuItems) {
         System.out.println("*--------------- MENU ---------------*");
         for (Integer key : menuItems.keySet()) {
-            System.out.println(key + " - " + menuItems.get(key));
+            System.out.println(key + " - " + menuItems.get(key).getDateDepart() + "-" + menuItems.get(key).getDateDepart() + "-" + menuItems.get(key).getVol().getVilleDepart() + "-" + menuItems.get(key).getVol().getVilleArrivee());
         }
         System.out.println("*------------------------------------*");
 
@@ -47,6 +48,30 @@ public class CommandLineView implements View {
                     " partant de " + depart.getVol().getVilleDepart() +
                     " et allant à " + depart.getVol().getVilleArrivee());
         }
+    }
+
+    @Override
+    public Integer affichageEtChoixString(HashMap<Integer, String> menuItems) {
+        System.out.println("*--------------- MENU ---------------*");
+        for (Integer key : menuItems.keySet()) {
+            System.out.println(key + " - " + menuItems.get(key));
+        }
+        System.out.println("*------------------------------------*");
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    @Override
+    public Integer affichageEtChoixPersonnel(HashMap<Integer, Personnel> personnelItem) {
+        System.out.println("*--------------- MENU ---------------*");
+        for (Integer key : personnelItem.keySet()) {
+            System.out.println(key + " - " + personnelItem.get(key).getNom() + " " + personnelItem.get(key).getPrenom());
+        }
+        System.out.println("*------------------------------------*");
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     @Override

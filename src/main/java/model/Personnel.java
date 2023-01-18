@@ -31,4 +31,12 @@ public class Personnel {
     public void addDepart(Depart depart) {
         listeDepart.add(depart);
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
 }

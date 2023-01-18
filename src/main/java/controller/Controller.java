@@ -35,13 +35,13 @@ public class Controller {
     }
 
     public Integer affichageEtChoixMenu() {
-        HashMap<Integer, Object> menuItems = new HashMap<>();
+        HashMap<Integer, String> menuItems = new HashMap<>();
         menuItems.put(0, "Quitter");
         menuItems.put(1, "Afficher les détails d'un vol");
         menuItems.put(2, "Associer du personnel à un départ de vol");
         menuItems.put(3, "Modify");
         menuItems.put(4, "Delete");
-        return view.affichageEtChoixMenu(menuItems);
+        return view.affichageEtChoixString(menuItems);
     }
 
     public void afficherVolsSurUneJournee() {
@@ -90,23 +90,23 @@ public class Controller {
 
     private void associerPersonnelVol() {
 
-        HashMap<Integer, Object> menuItems = new HashMap<>();
+        HashMap<Integer, Personnel> personnelItem = new HashMap<>();
 
         List<Personnel> personnels = recupererToutPersonnel();
         for (Personnel personnel : personnels) {
-            menuItems.put(personnel.getIDPersonnel(), personnel);
+            personnelItem.put(personnel.getIDPersonnel(), personnel);
         }
 
-        Integer choice = view.affichageEtChoixMenu(menuItems);
-        Personnel personnel = (Personnel) menuItems.get(choice);
+        Integer choice = view.affichageEtChoixPersonnel(personnelItem);
+        Personnel personnel = (Personnel) personnelItem.get(choice);
 
-        menuItems = new HashMap<>();
+        HashMap<Integer, Depart> departItem = new HashMap<>();
         List<Depart> departs = recupererToutDepart();
         for (Depart depart : departs) {
-            menuItems.put(depart.getIDDepart(), depart);
+            departItem.put(depart.getIDDepart(), depart);
         }
-        Integer choice2 = view.affichageEtChoixMenu(menuItems);
-        Depart depart = (Depart) menuItems.get(choice2);
+        Integer choice2 = view.affichageEtChoixDepart(departItem);
+        Depart depart = departItem.get(choice2);
 
         personnel.addDepart(depart);
         depart.addPersonnel(personnel);
