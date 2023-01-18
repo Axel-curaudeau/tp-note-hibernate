@@ -1,7 +1,9 @@
 package view;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class CommandLineView implements View {
@@ -18,9 +20,23 @@ public class CommandLineView implements View {
     }
 
     public LocalDate getDate() {
-        System.out.print("Entrez une date (format: dd-mm-yyyy):");
-        // TODO Récupérer la date saisie par l'utilisateur
-        return null;
+        System.out.print("Entrez une date (format: yyyy-mm-dd):");
+        Scanner scanner = new Scanner(System.in);
+        LocalDate date;
+        try {
+            date = LocalDate.parse(scanner.nextLine());
+        } catch (DateTimeParseException parseException) {
+            date = null;
+        }
+        return date;
+
+    }
+
+    @Override
+    public void afficherListe(List<Object> list) {
+        for (Object object : list) {
+            System.out.println(list);
+        }
     }
 
 
