@@ -39,5 +39,15 @@ public class CommandLineView implements View {
         }
     }
 
+    @Override
+    public void afficherMessageErreur(String s) {
+        System.err.println(s);
+    }
+
+    @Override
+    public void afficherMessage(String s) {
+        System.out.println(s);
+    }
+
 
 }

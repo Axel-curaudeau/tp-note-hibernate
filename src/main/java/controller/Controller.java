@@ -45,11 +45,15 @@ public class Controller {
 
     public void afficherVolsSurUneJournee() {
         LocalDate date = view.getDate();
-        //TODO: gérer l'exception
         if (date == null){
             view.afficherMessageErreur("Date saisie invalide !");
+            return;
         }
         List<Object> departs = em.createQuery("from Depart").getResultList();
+        if (departs.isEmpty()) {
+            view.afficherMessage("Aucun vol n'est enregistré dans la base de données.");
+            return;
+        }
         for (Object depart : departs) {
             Depart departTemporaire = (Depart) depart;
             if (LocalDate.parse(departTemporaire.getDateDepart()) != date) {
