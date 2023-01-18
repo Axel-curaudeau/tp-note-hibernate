@@ -24,11 +24,27 @@ public class Personnel {
         listeDepart = new ArrayList<Depart>();
     }
 
+    public Personnel() {
+        listeDepart = new ArrayList<Depart>();
+    }
+
     public Integer getIDPersonnel() {
         return IDPersonnel;
     }
 
     public void addDepart(Depart depart) {
         listeDepart.add(depart);
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public List<Depart> getListeDepart() {
+        return listeDepart;
     }
 }

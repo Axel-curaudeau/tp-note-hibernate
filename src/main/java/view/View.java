@@ -1,6 +1,7 @@
 package view;
 
 import model.Depart;
+import model.Personnel;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -17,4 +18,6 @@ public interface View {
     void afficherMessage(String s);
 
     void afficherListeDepart(List<Depart> departs);
+
+    void afficherListePersonnel(List<Personnel> personnels);
 }

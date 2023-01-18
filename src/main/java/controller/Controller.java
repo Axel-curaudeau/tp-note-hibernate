@@ -75,7 +75,7 @@ public class Controller {
             switch (choice) {
                 case 1 -> afficherVolsSurUneJournee();
                 case 2 -> associerPersonnelVol();
-                case 3 -> System.err.println("Modify");
+                case 3 -> afficherInfoPersonnel();
                 case 4 -> System.err.println("Delete");
                 default -> System.err.println("Invalid choice");
             }
@@ -118,6 +118,10 @@ public class Controller {
 
         commit(personnel);
         commit(depart);
+    }
+
+    private void afficherInfoPersonnel() {
+        view.afficherListePersonnel(recupererToutPersonnel());
     }
 
 

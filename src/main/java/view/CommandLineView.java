@@ -1,6 +1,7 @@
 package view;
 
 import model.Depart;
+import model.Personnel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -38,6 +39,13 @@ public class CommandLineView implements View {
     public void afficherListeDepart(List<Depart> listeDepart) {
         for (Depart depart : listeDepart) {
             System.out.println(depart.getIDDepart() + " - " + depart.getDateDepart() + " - " + depart.getVol().getVilleDepart() + " - " + depart.getVol().getVilleArrivee());
+        }
+    }
+
+    @Override
+    public void afficherListePersonnel(List<Personnel> personnels) {
+        for (Personnel personnel : personnels) {
+            System.out.println(personnel.getIDPersonnel() + " - " + personnel.getNom() + " - " + personnel.getPrenom());
         }
     }
 
