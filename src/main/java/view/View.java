@@ -2,6 +2,7 @@ package view;
 
 import model.Depart;
 import model.Personnel;
+import model.Vol;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -24,4 +25,8 @@ public interface View {
     Integer affichageEtChoixPersonnel(HashMap<Integer, Personnel> personnelItem);
 
     void afficherListePersonnel(List<Personnel> personnels, List<Depart> departs);
+
+    String demanderLieu();
+
+    void afficherListeVol(List<Vol> volsVersDestination);
 }

@@ -2,6 +2,7 @@ package view;
 
 import model.Depart;
 import model.Personnel;
+import model.Vol;
 import model.Volant;
 
 import java.time.LocalDate;
@@ -98,6 +99,30 @@ public class CommandLineView implements View {
             }
         }
         System.out.println(" ====================================================================");
+        System.out.println();
+    }
+
+    @Override
+    public String demanderLieu() {
+        System.out.print("Entrez un lieu: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+    @Override
+    public void afficherListeVol(List<Vol> volsVersDestination) {
+        System.out.println();
+        if (volsVersDestination.isEmpty()) {
+            System.out.println("Il n'y a aucun vol.");
+            return;
+        }
+
+        System.out.println(" ===================== Informations des vols =====================");
+
+        for (Vol vol : volsVersDestination) {
+            System.out.println("    - " + vol.getVilleDepart() + " " + (char) 8594 + " " + vol.getVilleArrivee() + " (" + vol.getIDVol() + ")");
+        }
+        System.out.println(" ==============================================================");
         System.out.println();
     }
 

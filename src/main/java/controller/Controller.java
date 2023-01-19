@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
-    private View view;
+    private final View view;
 
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager em;
-    private EntityTransaction tx;
+    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager em;
+    private final EntityTransaction tx;
     public Controller(View view) {
         this.view = view;
         this.entityManagerFactory = Persistence.createEntityManagerFactory("TP9");
@@ -40,7 +40,7 @@ public class Controller {
         menuItems.put(1, "Afficher les détails d'un vol");
         menuItems.put(2, "Associer du personnel à un départ de vol");
         menuItems.put(3, "Afficher toutes les informations du personnel");
-        menuItems.put(4, "Delete");
+        menuItems.put(4, "Afficher tous les vols qui ont pour destination un lieu donné");
         return view.affichageEtChoixString(menuItems);
     }
 
@@ -51,16 +51,14 @@ public class Controller {
             return;
         }
 
-        List<Depart> departs = em.createQuery("from Depart").getResultList();
-        List<Depart> departsSurDate = new ArrayList<Depart>();
+        List<Depart> departs = recupererToutDepart();
+        List<Depart> departsSurDate = new ArrayList<>();
 
         for (Depart depart : departs) {
-            Depart departTemporaire = depart;
-            if (LocalDate.parse(departTemporaire.getDateDepart()).equals(date)) {
+            if (LocalDate.parse(depart.getDateDepart()).equals(date)) {
                 departsSurDate.add(depart);
             }
         }
-        //TODO: Vérifier si l'affichage est correcte
         view.afficherListeDepart(departsSurDate);
     }
 
@@ -71,11 +69,12 @@ public class Controller {
                 case 1 -> afficherVolsSurUneJournee();
                 case 2 -> associerPersonnelVol();
                 case 3 -> afficherInfoPersonnel();
-                case 4 -> System.err.println("Delete");
+                case 4 -> afficherTousVolsVersLieux();
                 default -> System.err.println("Invalid choice");
             }
             choice = affichageEtChoixMenu();
         }
+        disconnect();
     }
 
     private List<Personnel> recupererToutPersonnel() {
@@ -86,6 +85,11 @@ public class Controller {
     private List<Depart> recupererToutDepart() {
         Query query = em.createQuery("from Depart");
         return (List<Depart>) query.getResultList();
+    }
+
+    private List<Vol> recupererToutVol() {
+        Query query = em.createQuery("from Vol");
+        return (List<Vol>) query.getResultList();
     }
 
     private void associerPersonnelVol() {
@@ -119,6 +123,21 @@ public class Controller {
         view.afficherListePersonnel(recupererToutPersonnel(), recupererToutDepart());
     }
 
+    public void afficherTousVolsVersLieux() {
+        List<Vol> vols = recupererToutVol();
+
+        String destination = view.demanderLieu();
+
+        List<Vol> volsVersDestination = new ArrayList<>();
+
+        for (Vol vol : vols) {
+            if (vol.getVilleArrivee().equals(destination)) {
+                volsVersDestination.add(vol);
+            }
+        }
+
+        view.afficherListeVol(volsVersDestination);
+    }
 
     public void insertDummyData() {
         Volant pilote = new Volant("Jean", "Dupont");
