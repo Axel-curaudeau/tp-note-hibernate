@@ -29,3 +29,6 @@ hs_err_pid*
 .idea/compiler.xml
 .idea/workspace.xml
 src/main/resources/META-INF/persistence.xml
+
+# target folder
+target/

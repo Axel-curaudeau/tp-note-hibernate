@@ -39,7 +39,7 @@ public class Controller {
         menuItems.put(0, "Quitter");
         menuItems.put(1, "Afficher les détails d'un vol");
         menuItems.put(2, "Associer du personnel à un départ de vol");
-        menuItems.put(3, "Modify");
+        menuItems.put(3, "Afficher toutes les informations du personnel");
         menuItems.put(4, "Delete");
         return view.affichageEtChoixString(menuItems);
     }
@@ -116,12 +116,12 @@ public class Controller {
     }
 
     private void afficherInfoPersonnel() {
-        view.afficherListePersonnel(recupererToutPersonnel());
+        view.afficherListePersonnel(recupererToutPersonnel(), recupererToutDepart());
     }
 
 
     public void insertDummyData() {
-        Volant pilote = new Volant("jean", "Dupont");
+        Volant pilote = new Volant("Jean", "Dupont");
         NonVolant Valiseur = new NonVolant("Charles", "Valise");
         Depart depart = new Depart("2021-05-01");
         Vol vol = new Vol("Paris", "Londres");

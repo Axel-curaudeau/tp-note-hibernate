@@ -48,4 +48,8 @@ public class Depart {
     public Vol getVol() {
         return vol;
     }
+
+    public List<Personnel> getListePersonnel() {
+        return listePersonnel;
+    }
 }

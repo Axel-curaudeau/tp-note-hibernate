@@ -18,7 +18,7 @@ public class Personnel {
     @ManyToMany(mappedBy = "listePersonnel")
     private List<Depart> listeDepart;
 
-    public Personnel(String nom, String prenom) {
+    public Personnel(String prenom, String nom) {
         this.nom = nom;
         this.prenom = prenom;
         listeDepart = new ArrayList<Depart>();

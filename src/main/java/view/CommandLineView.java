@@ -2,6 +2,7 @@ package view;
 
 import model.Depart;
 import model.Personnel;
+import model.Volant;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -52,11 +53,11 @@ public class CommandLineView implements View {
 
     @Override
     public Integer affichageEtChoixString(HashMap<Integer, String> menuItems) {
-        System.out.println("*--------------- MENU ---------------*");
+        System.out.println("*---------------------- MENU ----------------------*");
         for (Integer key : menuItems.keySet()) {
             System.out.println(key + " - " + menuItems.get(key));
         }
-        System.out.println("*------------------------------------*");
+        System.out.println("*--------------------------------------------------*");
 
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -64,20 +65,40 @@ public class CommandLineView implements View {
 
     @Override
     public Integer affichageEtChoixPersonnel(HashMap<Integer, Personnel> personnelItem) {
-        System.out.println("*--------------- MENU ---------------*");
+        System.out.println("*---------------------- MENU ----------------------*");
         for (Integer key : personnelItem.keySet()) {
             System.out.println(key + " - " + personnelItem.get(key).getNom() + " " + personnelItem.get(key).getPrenom());
         }
-        System.out.println("*------------------------------------*");
+        System.out.println("*--------------------------------------------------*");
 
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    public void afficherListePersonnel(List<Personnel> personnels) {
-        for (Personnel personnel : personnels) {
-            System.out.println(personnel.getIDPersonnel() + " - " + personnel.getNom() + " - " + personnel.getPrenom());
+    public void afficherListePersonnel(List<Personnel> personnels, List<Depart> departs) {
+        System.out.println();
+        if (personnels.isEmpty()) {
+            System.out.println("Il n'y a aucun personnel.");
+            return;
         }
+
+        System.out.println(" ===================== Informations du personnel =====================");
+
+        for (Personnel personnel : personnels) {
+            System.out.println("    - " + personnel.getPrenom() + " " + personnel.getNom() + " (" + personnel.getIDPersonnel() + ")");
+            for (Depart depart : departs) {
+                if (depart.getListePersonnel().contains(personnel)) {
+                    if (personnel instanceof Volant) {
+                        System.out.print("        " + (char) 11153 + " Départ le ");
+                    } else {
+                        System.out.print("        " + (char) 11153 + " Travaille le ");
+                    }
+                    System.out.println(depart.getDateDepart() + " sur le vol " + depart.getVol().getVilleDepart() + " " + (char) 8594 + " " + depart.getVol().getVilleArrivee());
+                }
+            }
+        }
+        System.out.println(" ====================================================================");
+        System.out.println();
     }
 
     @Override
