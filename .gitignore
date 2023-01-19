@@ -28,4 +28,4 @@ hs_err_pid*
 # xml
 .idea/compiler.xml
 .idea/workspace.xml
-*/persistence.xml
+src/main/resources/META-INF/persistence.xml
