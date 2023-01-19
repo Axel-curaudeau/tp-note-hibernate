@@ -25,6 +25,7 @@ hs_err_pid*
 # macOS shity things
 *.DS_Store
 
-# compiler xml
+# xml
 .idea/compiler.xml
 .idea/workspace.xml
+*/persistence.xml
