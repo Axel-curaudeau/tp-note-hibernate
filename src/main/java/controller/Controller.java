@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Controller {
     private final View view;
-
     private final EntityManagerFactory entityManagerFactory;
     private final EntityManager em;
     private final EntityTransaction tx;
+
     public Controller(View view) {
         this.view = view;
         this.entityManagerFactory = Persistence.createEntityManagerFactory("TP9");
@@ -34,6 +34,7 @@ public class Controller {
         tx.commit();
     }
 
+    //Menu Initial
     public Integer affichageEtChoixMenu() {
         HashMap<Integer, String> menuItems = new HashMap<>();
         menuItems.put(0, "Quitter");
@@ -44,6 +45,7 @@ public class Controller {
         return view.affichageEtChoixString(menuItems);
     }
 
+    //Fonctionnalité 1
     public void afficherVolsSurUneJournee() {
         LocalDate date = view.getDate();
         if (date == null){
@@ -62,36 +64,7 @@ public class Controller {
         view.afficherListeDepart(departsSurDate);
     }
 
-    public void run() {
-        Integer choice = affichageEtChoixMenu();
-        while (choice != 0){
-            switch (choice) {
-                case 1 -> afficherVolsSurUneJournee();
-                case 2 -> associerPersonnelVol();
-                case 3 -> afficherInfoPersonnel();
-                case 4 -> afficherTousVolsVersLieux();
-                default -> System.err.println("Invalid choice");
-            }
-            choice = affichageEtChoixMenu();
-        }
-        disconnect();
-    }
-
-    private List<Personnel> recupererToutPersonnel() {
-        Query query = em.createQuery("from Personnel");
-        return (List<Personnel>) query.getResultList();
-    }
-
-    private List<Depart> recupererToutDepart() {
-        Query query = em.createQuery("from Depart");
-        return (List<Depart>) query.getResultList();
-    }
-
-    private List<Vol> recupererToutVol() {
-        Query query = em.createQuery("from Vol");
-        return (List<Vol>) query.getResultList();
-    }
-
+    //Fonctionnalité 2
     private void associerPersonnelVol() {
 
         HashMap<Integer, Personnel> personnelItem = new HashMap<>();
@@ -119,10 +92,12 @@ public class Controller {
         commit(depart);
     }
 
+    //Fonctionnalité 3
     private void afficherInfoPersonnel() {
         view.afficherListePersonnel(recupererToutPersonnel(), recupererToutDepart());
     }
 
+    //Fonctionnalité 4
     public void afficherTousVolsVersLieux() {
         List<Vol> vols = recupererToutVol();
 
@@ -137,6 +112,36 @@ public class Controller {
         }
 
         view.afficherListeVol(volsVersDestination);
+    }
+
+    private List<Personnel> recupererToutPersonnel() {
+        Query query = em.createQuery("from Personnel");
+        return (List<Personnel>) query.getResultList();
+    }
+
+    private List<Depart> recupererToutDepart() {
+        Query query = em.createQuery("from Depart");
+        return (List<Depart>) query.getResultList();
+    }
+
+    private List<Vol> recupererToutVol() {
+        Query query = em.createQuery("from Vol");
+        return (List<Vol>) query.getResultList();
+    }
+
+    public void run() {
+        Integer choice = affichageEtChoixMenu();
+        while (choice != 0){
+            switch (choice) {
+                case 1 -> afficherVolsSurUneJournee();
+                case 2 -> associerPersonnelVol();
+                case 3 -> afficherInfoPersonnel();
+                case 4 -> afficherTousVolsVersLieux();
+                default -> System.err.println("Invalid choice");
+            }
+            choice = affichageEtChoixMenu();
+        }
+        disconnect();
     }
 
     public void insertDummyData() {
