@@ -54,11 +54,11 @@ public class CommandLineView implements View {
 
     @Override
     public Integer affichageEtChoixString(HashMap<Integer, String> menuItems) {
-        System.out.println("*---------------------- MENU ----------------------*");
+        System.out.println("*------------------------------ MENU ------------------------------*");
         for (Integer key : menuItems.keySet()) {
             System.out.println(key + " - " + menuItems.get(key));
         }
-        System.out.println("*--------------------------------------------------*");
+        System.out.println("*------------------------------------------------------------------*");
 
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -98,7 +98,7 @@ public class CommandLineView implements View {
                 }
             }
         }
-        System.out.println(" ====================================================================");
+        System.out.println(" =====================================================================");
         System.out.println();
     }
 
@@ -117,12 +117,12 @@ public class CommandLineView implements View {
             return;
         }
 
-        System.out.println(" ===================== Informations des vols =====================");
+        System.out.println(" ======================= Informations des vols =======================");
 
         for (Vol vol : volsVersDestination) {
             System.out.println("    - " + vol.getVilleDepart() + " " + (char) 8594 + " " + vol.getVilleArrivee() + " (" + vol.getIDVol() + ")");
         }
-        System.out.println(" ==============================================================");
+        System.out.println(" =====================================================================");
         System.out.println();
     }
 
