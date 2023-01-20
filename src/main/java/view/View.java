@@ -26,7 +26,11 @@ public interface View {
 
     void afficherListePersonnel(List<Personnel> personnels, List<Depart> departs);
 
-    String demanderLieu();
+    String demanderString(String message);
 
     void afficherListeVol(List<Vol> volsVersDestination);
+
+    Vol demanderVol();
+
+    Personnel demanderPersonnel();
 }

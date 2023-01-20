@@ -18,6 +18,10 @@ public class Vol {
     @OneToMany(mappedBy = "vol")
     private List<Depart> listeDepart;
 
+    public Vol() {
+        listeDepart = new ArrayList<Depart>();
+    }
+
     public Vol(String villeDepart, String villeArrivee) {
         this.villeDepart = villeDepart;
         this.villeArrivee = villeArrivee;

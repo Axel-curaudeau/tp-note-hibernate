@@ -113,7 +113,7 @@ public class Controller {
     public void afficherTousVolsVersLieux() {
         List<Vol> vols = recupererToutVol();
 
-        String destination = view.demanderLieu();
+        String destination = view.demanderString("Entrez un lieu: ");
 
         List<Vol> volsVersDestination = new ArrayList<>();
 
@@ -153,11 +153,22 @@ public class Controller {
                         case 3 -> view.afficherListeDepart(recupererToutDepart());
                     }
                 }
+                case 2 -> {
+                    Integer choice2 = affichafeEtChoixSousMenu();
+                    switch (choice2) {
+                        case 1 -> {
+                            commit(view.demanderVol());
+                            view.afficherMessage("Vol ajouté !");
+                        }
+                        case 2 -> commit(view.demanderPersonnel());
+                        //case 3 -> commit(new Depart(view.demanderDepart()));
+                    }
+                }
                 case 4 -> afficherVolsSurUneJournee();
                 case 5 -> associerPersonnelVol();
                 case 6 -> afficherInfoPersonnel();
                 case 7 -> afficherTousVolsVersLieux();
-                default -> System.err.println("Invalid choice");
+                default -> view.afficherMessageErreur("Choix invalide !");
             }
             choice = affichageEtChoixMenu();
         }

@@ -8,6 +8,7 @@ import model.Volant;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,7 +72,11 @@ public class CommandLineView implements View {
         System.out.println("*------------------------------------------------------------------*");
 
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        try {
+            return scanner.nextInt();
+        } catch (InputMismatchException e) {
+            return -1;
+        }
     }
 
     @Override
@@ -116,8 +121,8 @@ public class CommandLineView implements View {
     }
 
     @Override
-    public String demanderLieu() {
-        System.out.print("Entrez un lieu: ");
+    public String demanderString(String message) {
+        System.out.print(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -140,6 +145,20 @@ public class CommandLineView implements View {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         System.out.println();
+    }
+
+    @Override
+    public Vol demanderVol() {
+        String villeDepart = demanderString("Entrez un lieu: ");
+        String villeArrivee = demanderString("Entrez un lieu: ");
+        return new Vol(villeDepart, villeArrivee);
+    }
+
+    @Override
+    public Personnel demanderPersonnel() {
+        String nom = demanderString("Entrez un nom: ");
+        String prenom = demanderString("Entrez un prénom: ");
+        return new Personnel(nom, prenom);
     }
 
     @Override
