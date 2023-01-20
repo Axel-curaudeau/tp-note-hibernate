@@ -43,7 +43,7 @@ public class CommandLineView implements View {
             System.out.println("Aucun Depart correspondant.");
         }
 
-        System.out.println(" ===================== Informations du personnel =====================");
+        System.out.println(" ===================== Informations des Départs =====================");
 
         for (Depart depart : listeDepart) {
             System.out.println(
