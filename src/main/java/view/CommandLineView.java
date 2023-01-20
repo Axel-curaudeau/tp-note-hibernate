@@ -1,9 +1,6 @@
 package view;
 
-import model.Depart;
-import model.Personnel;
-import model.Vol;
-import model.Volant;
+import model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -15,6 +12,7 @@ import java.util.Scanner;
 public class CommandLineView implements View {
 
     public Integer affichageEtChoixDepart(HashMap<Integer, Depart> menuItems) {
+        System.out.println("Veuillez choisir un départ :");
         System.out.println("*--------------- MENU ---------------*");
         for (Integer key : menuItems.keySet()) {
             System.out.println(key + " - " + menuItems.get(key).getDateDepart() + "-" + menuItems.get(key).getDateDepart() + "-" + menuItems.get(key).getVol().getVilleDepart() + "-" + menuItems.get(key).getVol().getVilleArrivee());
@@ -81,6 +79,7 @@ public class CommandLineView implements View {
 
     @Override
     public Integer affichageEtChoixPersonnel(HashMap<Integer, Personnel> personnelItem) {
+        System.out.println("Veuillez choisir un personnel :");
         System.out.println("*---------------------- MENU ----------------------*");
         for (Integer key : personnelItem.keySet()) {
             System.out.println(key + " - " + personnelItem.get(key).getNom() + " " + personnelItem.get(key).getPrenom());
@@ -101,7 +100,13 @@ public class CommandLineView implements View {
         System.out.println(" ===================== Informations du personnel =====================");
 
         for (Personnel personnel : personnels) {
-            System.out.println("    - " + personnel.getPrenom() + " " + personnel.getNom() + " (" + personnel.getIDPersonnel() + ")");
+            System.out.print("    - " + personnel.getPrenom() + " " + personnel.getNom() + " (" + personnel.getIDPersonnel() + ")");
+            if (personnel instanceof  Volant) {
+                System.out.println(" (Volant)");
+            } else {
+                System.out.println(" (Non volant)");
+            }
+
             for (Depart depart : departs) {
                 if (depart.getListePersonnel().contains(personnel)) {
                     if (personnel instanceof Volant) {
@@ -158,7 +163,36 @@ public class CommandLineView implements View {
     public Personnel demanderPersonnel() {
         String nom = demanderString("Entrez un nom: ");
         String prenom = demanderString("Entrez un prénom: ");
-        return new Personnel(nom, prenom);
+
+        System.out.println("Le personnel est-il volant ?");
+        System.out.println("1 - Volant");
+        System.out.println("2 - Non volant");
+        Scanner scanner = new Scanner(System.in);
+        int choix = scanner.nextInt();
+        if (choix == 1) {
+            return new Volant(nom, prenom);
+        } else {
+            return new NonVolant(nom, prenom);
+        }
+    }
+
+    @Override
+    public Depart demanderDepart(Vol vol) {
+        LocalDate dateDepart = getDate();
+        return new Depart(dateDepart, vol);
+    }
+
+    @Override
+    public Integer affichageEtChoixVol(HashMap<Integer, Vol> volsItems) {
+        System.out.println("Veuillez choisir un vol :");
+        System.out.println("*---------------------- MENU ----------------------*");
+        for (Integer key : volsItems.keySet()) {
+            System.out.println(key + " - " + volsItems.get(key).getVilleDepart() + " " + (char) 8594 + " " + volsItems.get(key).getVilleArrivee());
+        }
+        System.out.println("*--------------------------------------------------*");
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     @Override

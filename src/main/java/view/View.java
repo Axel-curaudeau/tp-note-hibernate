@@ -33,4 +33,8 @@ public interface View {
     Vol demanderVol();
 
     Personnel demanderPersonnel();
+
+    Depart demanderDepart(Vol vol);
+
+    Integer affichageEtChoixVol(HashMap<Integer, Vol> volsItems);
 }

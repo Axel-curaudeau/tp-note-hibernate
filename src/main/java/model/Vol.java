@@ -1,6 +1,7 @@
 package model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Vol {
     private String villeArrivee;
 
     @OneToMany(mappedBy = "vol")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Depart> listeDepart;
 
     public Vol() {

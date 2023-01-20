@@ -1,6 +1,7 @@
 package controller;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import model.*;
 import view.View;
 import java.time.LocalDate;
@@ -40,11 +41,10 @@ public class Controller {
         menuItems.put(0, "Quitter");
         menuItems.put(1, "Afficher...");
         menuItems.put(2, "Ajouter...");
-        menuItems.put(3, "Supprimer...");
-        menuItems.put(4, "Afficher les détails d'un vol");
-        menuItems.put(5, "Associer du personnel à un départ de vol");
-        menuItems.put(6, "Afficher toutes les informations du personnel");
-        menuItems.put(7, "Afficher tous les vols qui ont pour destination un lieu donné");
+        menuItems.put(3, "Afficher les détails d'un vol");
+        menuItems.put(4, "Associer du personnel à un départ de vol");
+        menuItems.put(5, "Afficher toutes les informations du personnel");
+        menuItems.put(6, "Afficher tous les vols qui ont pour destination un lieu donné");
         return view.affichageEtChoixString(menuItems);
     }
 
@@ -98,10 +98,17 @@ public class Controller {
         Depart depart = departItem.get(choice2);
 
         personnel.addDepart(depart);
-        depart.addPersonnel(personnel);
-
-        commit(personnel);
-        commit(depart);
+        Integer i = depart.addPersonnel(personnel);
+        if (i == 1) {
+            view.afficherMessageErreur("Trop de personnel volant sur ce départ !");
+        }
+        if (i == 2) {
+            view.afficherMessageErreur("Ce personnel est déjà affecté à ce départ !");
+        }
+        else {
+            commit(personnel);
+            commit(depart);
+        }
     }
 
     //Fonctionnalité 3
@@ -149,7 +156,7 @@ public class Controller {
                     Integer choice2 = affichafeEtChoixSousMenu();
                     switch (choice2) {
                         case 1 -> view.afficherListeVol(recupererToutVol());
-                        case 2 -> view.afficherListePersonnel(recupererToutPersonnel(), recupererToutDepart());
+                        case 2 -> afficherInfoPersonnel();
                         case 3 -> view.afficherListeDepart(recupererToutDepart());
                     }
                 }
@@ -160,14 +167,27 @@ public class Controller {
                             commit(view.demanderVol());
                             view.afficherMessage("Vol ajouté !");
                         }
-                        case 2 -> commit(view.demanderPersonnel());
-                        //case 3 -> commit(new Depart(view.demanderDepart()));
+                        case 2 -> {
+                            commit(view.demanderPersonnel());
+                            view.afficherMessage("Personnel ajouté !");
+                        }
+                        case 3 -> {
+                            HashMap<Integer, Vol> volItem = new HashMap<>();
+                            List<Vol> vols = recupererToutVol();
+                            for (Vol vol : vols) {
+                                volItem.put(vol.getIDVol(), vol);
+                            }
+                            Integer choixVol = view.affichageEtChoixVol(volItem);
+                            Vol vol = volItem.get(choixVol);
+                            commit(view.demanderDepart(vol));
+                            view.afficherMessage("Départ ajouté !");
+                        }
                     }
                 }
-                case 4 -> afficherVolsSurUneJournee();
-                case 5 -> associerPersonnelVol();
-                case 6 -> afficherInfoPersonnel();
-                case 7 -> afficherTousVolsVersLieux();
+                case 3 -> afficherVolsSurUneJournee();
+                case 4 -> associerPersonnelVol();
+                case 5 -> afficherInfoPersonnel();
+                case 6 -> afficherTousVolsVersLieux();
                 default -> view.afficherMessageErreur("Choix invalide !");
             }
             choice = affichageEtChoixMenu();
@@ -178,8 +198,8 @@ public class Controller {
     public void insertDummyData() {
         Volant pilote = new Volant("Jean", "Dupont");
         NonVolant Valiseur = new NonVolant("Charles", "Valise");
-        Depart depart = new Depart("2021-05-01");
         Vol vol = new Vol("Paris", "Londres");
+        Depart depart = new Depart("2021-05-01", vol);
         vol.addDepart(depart);
         depart.addVol(vol);
         pilote.addDepart(depart);
@@ -188,7 +208,7 @@ public class Controller {
         depart.addPersonnel(Valiseur);
         commit(pilote);
         commit(Valiseur);
-        commit(depart);
         commit(vol);
+        commit(depart);
     }
 }
