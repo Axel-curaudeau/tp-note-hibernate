@@ -1,9 +1,6 @@
 package model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import java.util.ArrayList;
 import java.util.List;
 

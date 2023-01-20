@@ -23,7 +23,7 @@ public class CommandLineView implements View {
         return scanner.nextInt();
     }
 
-    public LocalDate getDate() {
+    public LocalDate demanderDate() {
         System.out.print("Entrez une date (format: yyyy-mm-dd):");
         Scanner scanner = new Scanner(System.in);
         LocalDate date;
@@ -178,7 +178,7 @@ public class CommandLineView implements View {
 
     @Override
     public Depart demanderDepart(Vol vol) {
-        LocalDate dateDepart = getDate();
+        LocalDate dateDepart = demanderDate();
         return new Depart(dateDepart, vol);
     }
 

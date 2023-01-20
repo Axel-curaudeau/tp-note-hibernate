@@ -11,8 +11,7 @@ import java.util.List;
 public interface View {
     Integer affichageEtChoixDepart(HashMap<Integer, Depart> menuItems);
 
-    LocalDate getDate();
-
+    LocalDate demanderDate();
 
     void afficherMessageErreur(String s);
 

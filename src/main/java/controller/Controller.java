@@ -1,7 +1,6 @@
 package controller;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import model.*;
 import view.View;
 import java.time.LocalDate;
@@ -59,7 +58,7 @@ public class Controller {
 
     //Fonctionnalité 1
     public void afficherVolsSurUneJournee() {
-        LocalDate date = view.getDate();
+        LocalDate date = view.demanderDate();
         if (date == null){
             view.afficherMessageErreur("Date saisie invalide !");
             return;
