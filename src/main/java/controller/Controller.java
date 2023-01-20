@@ -38,10 +38,22 @@ public class Controller {
     public Integer affichageEtChoixMenu() {
         HashMap<Integer, String> menuItems = new HashMap<>();
         menuItems.put(0, "Quitter");
-        menuItems.put(1, "Afficher les détails d'un vol");
-        menuItems.put(2, "Associer du personnel à un départ de vol");
-        menuItems.put(3, "Afficher toutes les informations du personnel");
-        menuItems.put(4, "Afficher tous les vols qui ont pour destination un lieu donné");
+        menuItems.put(1, "Afficher...");
+        menuItems.put(2, "Ajouter...");
+        menuItems.put(3, "Supprimer...");
+        menuItems.put(4, "Afficher les détails d'un vol");
+        menuItems.put(5, "Associer du personnel à un départ de vol");
+        menuItems.put(6, "Afficher toutes les informations du personnel");
+        menuItems.put(7, "Afficher tous les vols qui ont pour destination un lieu donné");
+        return view.affichageEtChoixString(menuItems);
+    }
+
+    public Integer affichafeEtChoixSousMenu() {
+        HashMap<Integer, String> menuItems = new HashMap<>();
+        menuItems.put(0, "Retour");
+        menuItems.put(1, "Vol");
+        menuItems.put(2, "Personnel");
+        menuItems.put(3, "Départ");
         return view.affichageEtChoixString(menuItems);
     }
 
@@ -133,10 +145,18 @@ public class Controller {
         Integer choice = affichageEtChoixMenu();
         while (choice != 0){
             switch (choice) {
-                case 1 -> afficherVolsSurUneJournee();
-                case 2 -> associerPersonnelVol();
-                case 3 -> afficherInfoPersonnel();
-                case 4 -> afficherTousVolsVersLieux();
+                case 1 -> {
+                    Integer choice2 = affichafeEtChoixSousMenu();
+                    switch (choice2) {
+                        case 1 -> view.afficherListeVol(recupererToutVol());
+                        case 2 -> view.afficherListePersonnel(recupererToutPersonnel(), recupererToutDepart());
+                        case 3 -> view.afficherListeDepart(recupererToutDepart());
+                    }
+                }
+                case 4 -> afficherVolsSurUneJournee();
+                case 5 -> associerPersonnelVol();
+                case 6 -> afficherInfoPersonnel();
+                case 7 -> afficherTousVolsVersLieux();
                 default -> System.err.println("Invalid choice");
             }
             choice = affichageEtChoixMenu();

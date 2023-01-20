@@ -42,14 +42,24 @@ public class CommandLineView implements View {
         if (listeDepart.isEmpty()) {
             System.out.println("Aucun Depart correspondant.");
         }
+
+        System.out.println(" ===================== Informations du personnel =====================");
+
         for (Depart depart : listeDepart) {
             System.out.println(
+                    "    - " +
                     "Départ numéro " +
                     depart.getIDDepart() +
                     " du " + depart.getDateDepart() +
                     " partant de " + depart.getVol().getVilleDepart() +
                     " et allant à " + depart.getVol().getVilleArrivee());
         }
+
+        System.out.println(" =====================================================================");
+
+        System.out.println("Appuyez sur Entré pour continuer.");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     @Override
@@ -99,6 +109,9 @@ public class CommandLineView implements View {
             }
         }
         System.out.println(" =====================================================================");
+        System.out.println("Appuyez sur Entré pour continuer.");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
         System.out.println();
     }
 
@@ -123,6 +136,9 @@ public class CommandLineView implements View {
             System.out.println("    - " + vol.getVilleDepart() + " " + (char) 8594 + " " + vol.getVilleArrivee() + " (" + vol.getIDVol() + ")");
         }
         System.out.println(" =====================================================================");
+        System.out.println("Appuyez sur Entré pour continuer.");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
         System.out.println();
     }
 
